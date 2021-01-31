@@ -1,0 +1,21 @@
+{
+  "name": "create-p5-project",
+  "version": "1.0.0",
+  "description": "create p5 project using cdn p5 package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LennyTGIF",
+  "license": "ISC",
+  "bin": {
+    "create-p5-project": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^7.0.0",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
+    "sync-request": "^6.1.0"
+  },
+  "type": "module"
+}
