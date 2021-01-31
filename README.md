@@ -1,12 +1,13 @@
 # create-p5-project
 CDNjs から [p5js](https://github.com/processing/p5.js/) を取得する p5 project テンプレート生成コマンドである．
+
 [p5-manager](https://github.com/chiunhau/p5-manager)
 を参考にした．
 
 p5-manager は p5js のライブラリをローカルにダウンロードしているが，
-create-p5-project はp5jsをCDNを使ってライブラリを取得している．
+create-p5-project では p5js をCDN経由で取得している．
 
-p5-managerほどの機能はない，テンプレートを生成する最低限のもの．
+p5-manager ほどの機能はない，テンプレートを生成する最低限のもの．
 
 
 ## Templates
@@ -23,7 +24,7 @@ project
 
 
 ## Path
-npmには公開してないので，`create-p5-project`を使うためには，
+npmには公開してないので，`create-p5-project`を使うためには
 プロジェクトをcloneして，
 `npm link`でコマンドのパスを通す必要がある．
 
