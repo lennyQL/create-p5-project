@@ -46,7 +46,12 @@ $ create-p5-project version
 # http-server開始
 ## プロジェクトの中で使う(index.htmlがある場所でしか使えない)
 ## default port: 5555
-## option: '-p <port>'でポートしてできる
+## option: '-p <port>'でポート指定できる
 $ create-p5-project server
 ```
 
+## TODO
+- プロジェクトごとのREADEMEのテンプレート生成
+    * project websit へのリンク(github pagesとか)
+    * 説明，テーマ，コンセプト，工夫などのテンプレート
+- gitは必要ない？
