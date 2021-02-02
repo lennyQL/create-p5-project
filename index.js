@@ -52,5 +52,20 @@ program
 		server.run(req.port || 5555);
 	})
 
+/**
+ * 自作モジュール(script)のリンク及びプロジェクトへの追加
+ */
+program
+	.command('add <module>')
+	.alias('a')
+	.description('Add new module to my project and link script in index.html')
+	.option('-t, --template ', 'Add module in create-p5-project/templates/mopdules')
+	.action((req, opt) => {
+		generator.addModule(req, opt);
+	})
+
 program
 	.parse(process.argv);
+
+
+// process.exit();
