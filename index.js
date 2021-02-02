@@ -35,7 +35,7 @@ program
 program
 	.command('version')
 	.alias('v')
-	.description('Show p5js version')
+	.description('Show latest p5js version')
 	.action(function(req, res) {
 		generator.version();
 	})
@@ -58,10 +58,21 @@ program
 program
 	.command('add <module>')
 	.alias('a')
-	.description('Add new module to my project and link script in index.html')
+	.description('Add new module to project and link script in index.html')
 	.option('-t, --template ', 'Add module in create-p5-project/templates/mopdules')
 	.action((req, opt) => {
 		generator.addModule(req, opt);
+	})
+
+/**
+ * p5jsのライブラリのversion確認
+ */
+program
+	.command('remove <module>')
+	.alias('r')
+	.description('Remove and unlink module from project')
+	.action(function(req, opt) {
+		generator.remove(req, opt);
 	})
 
 program

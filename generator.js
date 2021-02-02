@@ -11,7 +11,7 @@
 
 // "use strict";
 
-import { readdirSync, readFileSync, writeFileSync, mkdir as _mkdir } from 'fs';
+import { unlinkSync, readdirSync, readFileSync, writeFileSync, mkdir as _mkdir } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 // import path from 'path';
@@ -103,7 +103,7 @@ const generator = {
 		if(searchFiles('index.html')) {
 			indexhtml = loadProjectFile('index.html');
 		} else {
-			console.log("\x1b[33mWarning\x1b[0m : index.html does not exist.");
+			console.log("\x1b[33mWarning\x1b[0m : index.html does not exist. You cannot run this command here.");
 			return;
 		}
 		
@@ -158,6 +158,35 @@ const generator = {
 		// console.log(indexhtml);
 
 		link(indexhtml, script);
+	},
+
+
+	/**
+	 * プロジェクトからファイルを削除して，同時に
+	 * index.htmlからscriptのリンクを削除する
+	 */
+	remove: function(file, opt) {
+		// load file
+		let indexhtml;
+		if(searchFiles('index.html')) {
+			indexhtml = loadProjectFile('index.html');
+		} else {
+			console.log("\x1b[33mWarning\x1b[0m : index.html does not exist.");
+			return;
+		}
+
+		// remove and unlink file if exits
+		if(!searchFiles(file)) {
+			console.log("\x1b[33mWarning\x1b[0m : " + file + " dose not exist.");
+			return;
+		}
+		// index.html and scketch.js cannot be removed
+		else if(file == 'index.html' || file == 'sketch.js') {
+			console.log("\x1b[33mWarning\x1b[0m : " + file + " cannot be removed.");
+			return;
+		}
+		remove(file);
+		unlink(indexhtml, file);
 	}
 }
 
@@ -208,6 +237,7 @@ function searchFiles(name, dir = process.cwd()) {
 	const allDirents = readdirSync(dir, { withFileTypes: true });
 
 	for (const dirent of allDirents) {
+		// console.log(dirent.name)
 		if(dirent.name == name) {
 			return true;
 		}
@@ -230,6 +260,31 @@ function link(indexhtml, mod) {
 	// link script
 	writeFileSync('index.html', indexhtml.replace(tag, res));
 	console.log('   \x1b[36mlink\x1b[0m : ' + script);
+}
+
+
+/**
+ * unlink script from index.html
+ * @param {*} indexhtml 
+ * @param {*} script 
+ */
+function unlink(indexhtml, script) {
+	// init tag for replace in html
+	const tag = '\n\t<script src="' + script + '"></script>';
+	const res = '';
+	// link script
+	writeFileSync('index.html', indexhtml.replace(tag, res));
+	console.log('   \x1b[31munlink\x1b[0m : ' + script);
+}
+
+
+/**
+ * remove file from project
+ * @param {*} name 
+ */
+function remove(name) {
+	unlinkSync(name);
+	console.log('   \x1b[31mremove\x1b[0m : ' + name);
 }
 
 
