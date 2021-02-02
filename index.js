@@ -65,7 +65,7 @@ program
 	})
 
 /**
- * p5jsのライブラリのversion確認
+ * 自作モジュールをプロジェクトから削除する，htmlにあるリンクも外す
  */
 program
 	.command('remove <module>')
